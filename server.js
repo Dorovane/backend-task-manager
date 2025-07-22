@@ -5,7 +5,7 @@ const morgan=require('morgan')
 const helmet=require('helmet')
 const { Users,Tasks } = require('./models')
 const app=express()
-const PORT=process.env.PORT
+const PORT = process.env.PORT || 3000
 
 
 

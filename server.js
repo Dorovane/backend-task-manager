@@ -3,14 +3,13 @@ const express=require('express')
 const cors=require('cors')
 const morgan=require('morgan')
 const helmet=require('helmet')
-const { Users,Tasks } = require('./models')
+const sequelize = require('./config/db')
 const app=express()
 const PORT = process.env.PORT || 3000
 
 
 
-Users
-Tasks
+
 
 app.use(cors())
 app.use(morgan('dev'))

@@ -16,6 +16,7 @@ sequelize.authenticate()
     console.log('Connexion reussie')
   })
   .catch((error)=>{
+    console.log(process.env.DATABASE_URL)
     console.log(error)
   })
   

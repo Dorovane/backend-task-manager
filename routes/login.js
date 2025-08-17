@@ -34,6 +34,7 @@ module.exports=(app)=>{
                 }
               })
               .catch((error)=>{
+                console.error(error)
                 res.status(500).json({
                   message:'Erreur du serveur'
                 })
@@ -45,6 +46,7 @@ module.exports=(app)=>{
           }
         })
         .catch((error)=>{
+          console.error(error)
           res.status(500).json({
             message:'Erreur du serveur'
           })

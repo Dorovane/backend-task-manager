@@ -19,7 +19,7 @@ sequelize.authenticate()
   console.log('Connexion reussie')
 })
 .catch((error)=>{
-  console.log(error)
+  console.error(error)
 })
 
 

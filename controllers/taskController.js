@@ -53,11 +53,13 @@ exports.addTask=(req, res) => {
     })
     .catch((error)=>{
       if(error instanceof ValidationError){
+        console.error(error)
         res.status(400).json({
           message:error.errors[0].message
         })
       }
       else{
+        console.error(error)
         res.status(500).json({
           message:'Erreur du serveur '
         })
@@ -84,7 +86,8 @@ exports.deleteTask=(req,res)=>{
               })
             }
           })
-          .catch(()=>{
+          .catch((error)=>{
+            console.error(error)
             res.status(500).json({
               message:'Erreur du serveur'
             })
@@ -96,7 +99,8 @@ exports.deleteTask=(req,res)=>{
         })
       }
     })
-    .catch(()=>{
+    .catch((error)=>{
+      console.error(error)
       res.status(500).json({
         message:'Erreur du serveur'
       })
@@ -119,6 +123,7 @@ exports.getTask=(req,res)=>{
       }
     })
     .catch((error)=>{
+      console.error(error)
       res.status(500).json({
         mesasage:'Erreur du serveur'
       })
@@ -159,11 +164,13 @@ exports.updateTask=(req, res) => {
               }
             })
             .catch((error) => {
+              console.error(error)
               if(error instanceof ValidationError){
                 res.status(400).json({
                   message:error.errors[0].message
                 })
               }else{
+                console.error(error)
                 res.status(500).json({
                   message: 'Erreur du serveur'
                 })
@@ -177,7 +184,8 @@ exports.updateTask=(req, res) => {
         })
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error)
       res.status(500).json({
         message: 'Erreur du serveur'
       })

@@ -32,26 +32,30 @@ exports.createUser = (req, res) => {
                   })
                 })
                 .catch((error) => {
+                  console.error(error)
                   if (error instanceof ValidationError) {
                     res.status(400).json({
                       message: error.errors[0].message
                     })
                   }
                   else {
+                    console.error(error)
                     res.status(500).json({
                       message: 'Erreur du serveur'
                     })
                   }
                 })
             })
-            .catch(() => {
+            .catch((error) => {
+              console.error(error)
               res.status(500).json({
                 message: 'Erreur du serveur'
               })
             })
         }
       }))
-      .catch(() => {
+      .catch((error) => {
+        console.error(error)
         res.status(500).json({
           message: 'Erreur du serveur'
         })
@@ -75,7 +79,8 @@ exports.getUser = (req, res) => {
         })
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error)
       res.status(500).json({
         message: 'Erreur de serveur'
       })
@@ -97,7 +102,8 @@ exports.deleteUser = (req, res) => {
               message: 'Utilisateur supprimé'
             })
           })
-          .catch((_) => {
+          .catch((error) => {
+            console.error(error)
             res.status(500).json({
               message: 'Erreur du serveur'
             })
@@ -108,7 +114,8 @@ exports.deleteUser = (req, res) => {
         })
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error)
       res.status(500).json({
         message: 'Erreur de serveur'
       })
@@ -143,11 +150,13 @@ exports.updateUser = (req, res) => {
               })
               .catch((error) => {
                 if (error instanceof ValidationError) {
+                  console.error(error)
                   res.status(400).json({
                     message: error.errors[0].message
                   })
                 }
                 else {
+                  console.error(error)
                   res.status(500).json({
                     message: 'Erreur du serveur'
                   })
@@ -176,12 +185,14 @@ exports.updateUser = (req, res) => {
                           })
                         })
                         .catch((error) => {
+                          console.error(error)
                           if (error instanceof ValidationError) {
                             res.status(400).json({
                               message: error.errors[0].message
                             })
                           }
                           else {
+                            console.error(error)
                             res.status(500).json({
                               message: 'Erreur du serveur'
                             })
@@ -189,6 +200,7 @@ exports.updateUser = (req, res) => {
                         })
                     })
                     .catch((error) => {
+                      console.error(error)
                       res.status(500).json({
                         message: 'Erreur du serveur'
                       })
@@ -200,7 +212,8 @@ exports.updateUser = (req, res) => {
                   })
                 }
               })
-              .catch(() => {
+              .catch((error) => {
+                console.error(error)
                 res.status(500).json({
                   message: 'Erreur du serveur'
                 })
@@ -214,7 +227,8 @@ exports.updateUser = (req, res) => {
         })
       }
     })
-    .catch(() => {
+    .catch((error) => {
+      console.error(error)
       res.status(500).json({
         message: 'Erreur du serveur'
       })

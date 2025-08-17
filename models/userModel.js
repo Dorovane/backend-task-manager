@@ -18,8 +18,10 @@ module.exports=(sequelize)=>{
           args: [2, 50],
           msg: 'Le nom doit contenir entre 2 et 50 caractères'
         },
-        isAlpha: {
-          msg: 'Le nom ne peut contenir que des lettres'
+        isString(value){
+          if(typeof(value)!=='string'){
+            throw new Error('Le nom doit être un ensemble de lettre')
+          }
         }
       }
     },
@@ -34,8 +36,10 @@ module.exports=(sequelize)=>{
           args: [2, 50],
           msg: 'Le prénom doit contenir entre 2 et 50 caractères'
         },
-        isAlpha: {
-          msg: 'Le prénom ne peut contenir que des lettres'
+        isString(value){
+          if(typeof(value)!=='string'){
+            throw new Error('Le nom doit être un ensemble de lettre')
+          }
         }
       }
     },

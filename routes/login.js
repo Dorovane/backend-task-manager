@@ -19,7 +19,7 @@ module.exports=(app)=>{
               .then((success)=>{
                 if(success){
                   const token=jwt.sign(
-                    {userId:user.id},
+                    {userId:user.id,username:user.firstname},
                     SECRET_KEY,
                     {expiresIn:'1d'}
                   )

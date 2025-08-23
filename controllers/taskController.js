@@ -202,13 +202,13 @@ exports.checkedTask=(req,res)=>{
         Tasks.update({checked},{where:{id:id}})
           .then(()=>{
             res.status(200).json({
-              message:'Félicitations'
+              message:'Maj reussis'
             })
-            .catch((error)=>{
-              console.error(error)
-              res.status(500).json({
-                message:'Erreur du serveur'
-              })
+          })
+          .catch((error)=>{
+            console.error(error)
+            res.status(500).json({
+              message:'Erreur du serveur'
             })
           })
       }

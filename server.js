@@ -13,6 +13,7 @@ const userRoutes=require('./routes/users')
 
 
 //Middlewares globales
+//app.use(cors({origin:'http://localhost:5173/'}))
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())

@@ -1,4 +1,4 @@
-const { ValidationError } = require("sequelize")
+const { ValidationError, where } = require("sequelize")
 const { Tasks } = require("../models")
 
 //Récuperer les taches
@@ -191,4 +191,37 @@ exports.updateTask=(req, res) => {
         message: 'Erreur du serveur'
       })
     })
+}
+
+exports.checkedTask=(req,res)=>{
+  const id=req.params.id
+  const checked= req.body.checked
+  Tasks.findByPk(id)
+    .then((task)=>{
+      if(task){
+        Tasks.update({checked},{where:{id:id}})
+          .then(()=>{
+            res.status(200).json({
+              message:'Félicitations'
+            })
+            .catch((error)=>{
+              console.error(error)
+              res.status(500).json({
+                message:'Erreur du serveur'
+              })
+            })
+          })
+      }
+      else{
+        res.status(400).json({
+          message:'Tache non disponible'
+        })
+      }
+    })
+    .catch((error)=>{
+      console.error(error)
+      res.status(500).json({
+        message:'Erreur du serveur'
+      })
+    }) 
 }

@@ -1,7 +1,7 @@
 const auth = require("../middlewares/auth")
 
 const express=require('express')
-const { getTasks, addTask, deleteTask, getTask, updateTask } = require("../controllers/taskController")
+const { getTasks, addTask, deleteTask, getTask, updateTask, checkedTask } = require("../controllers/taskController")
 
 const router=express.Router()
 
@@ -13,13 +13,16 @@ router.get('/',auth,getTasks)
 router.post('/',auth, addTask)
 
 //Supprimer une tache
-router.delete('/:id',auth,deleteTask)
+router.delete('/:id',deleteTask)
 
 //Recuperer une tache
-router.get('/:id',auth,getTask)
+router.get('/:id',getTask)
 
 //Mise a jour d'une tache
 
-router.put('/:id', auth, updateTask)
+router.put('/:id',auth, updateTask)
+
+//Maj partielle
+router.patch('/:id',checkedTask)
 
 module.exports=router

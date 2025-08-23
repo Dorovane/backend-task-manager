@@ -200,9 +200,10 @@ exports.checkedTask=(req,res)=>{
     .then((task)=>{
       if(task){
         Tasks.update({checked},{where:{id:id}})
-          .then(()=>{
+          .then((task)=>{
             res.status(200).json({
-              message:'Maj reussis'
+              message:'Maj reussis',
+              data:task
             })
           })
           .catch((error)=>{

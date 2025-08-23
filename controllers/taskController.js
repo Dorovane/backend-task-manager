@@ -133,50 +133,63 @@ exports.getTask=(req,res)=>{
 
 exports.updateTask=(req, res) => {
   const id = req.params.id
-  const idUser=req.user.userId
   Tasks.findByPk(id)
     .then((task) => {
       if (task) {
-        const { title, description, deadline, priority , status } = req.body
-        if (!title || !priority) {
-          res.status(400).json({
-            message: 'Veuillez verifier le titre ou la priorité'
+        const { title, description, deadline, priority,checked,status} = req.body
+        if(checked===undefined){
+          Tasks.update({checked,status},{where:{id:id}})
+          .then(()=>{
+            res.status(200).json({
+              message:'Maj reussis',
+            })
+          })
+          .catch((error)=>{
+            console.error(error)
+            res.status(500).json({
+              message:'Erreur du serveur'
+            })
           })
         }
         else{
-          Tasks.update({
-            title,
-            description,
-            userId:idUser,
-            deadline,
-            priority,
-            status
-          },{ where: { id: id } })
-            .then((success) => {
-              if (success) {
-                res.status(200).json({
-                  message: 'Tache Maj'
-                })
-              }
-              else {
-                res.status(400).json({
-                  message: 'Impossible de maj la tache'
-                })
-              }
+          if (!title || !priority) {
+            res.status(400).json({
+              message: 'Veuillez verifier le titre ou la priorité'
             })
-            .catch((error) => {
-              console.error(error)
-              if(error instanceof ValidationError){
-                res.status(400).json({
-                  message:error.errors[0].message
-                })
-              }else{
+          }
+          else{
+            Tasks.update({
+              title,
+              description,
+              deadline,
+              priority,
+            },{ where: { id: id } })
+              .then((success) => {
+                if (success) {
+                  res.status(200).json({
+                    message: 'Tache Maj'
+                  })
+                }
+                else {
+                  res.status(400).json({
+                    message: 'Impossible de maj la tache'
+                  })
+                }
+              })
+              .catch((error) => {
                 console.error(error)
-                res.status(500).json({
-                  message: 'Erreur du serveur'
-                })
-              }
-            })
+                if(error instanceof ValidationError){
+                  res.status(400).json({
+                    message:error.errors[0].message
+                  })
+                }else{
+                  console.error(error)
+                  res.status(500).json({
+                    message: 'Erreur du serveur'
+                  })
+                }
+              })
+          }
         }
       }
       else {
@@ -191,39 +204,4 @@ exports.updateTask=(req, res) => {
         message: 'Erreur du serveur'
       })
     })
-}
-
-exports.checkedTask=(req,res)=>{
-  const id=req.params.id
-  const checked= req.body.checked
-  Tasks.findByPk(id)
-    .then((task)=>{
-      const newTask=task
-      if(task){
-        Tasks.update({checked},{where:{id:id}})
-          .then(()=>{
-            res.status(200).json({
-              message:'Maj reussis',
-              data:newTask
-            })
-          })
-          .catch((error)=>{
-            console.error(error)
-            res.status(500).json({
-              message:'Erreur du serveur'
-            })
-          })
-      }
-      else{
-        res.status(400).json({
-          message:'Tache non disponible'
-        })
-      }
-    })
-    .catch((error)=>{
-      console.error(error)
-      res.status(500).json({
-        message:'Erreur du serveur'
-      })
-    }) 
 }

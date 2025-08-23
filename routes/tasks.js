@@ -20,9 +20,7 @@ router.get('/:id',getTask)
 
 //Mise a jour d'une tache
 
-router.put('/:id',auth, updateTask)
-
-//Maj partielle
 router.patch('/:id',checkedTask)
+
 
 module.exports=router

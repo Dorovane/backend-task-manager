@@ -1,6 +1,7 @@
 const { ValidationError } = require("sequelize")
 const { Tasks } = require("../models")
 
+//Récuperer les taches
 exports.getTasks=(req,res)=>{
   const id=req.user.userId
   const username=req.user.username

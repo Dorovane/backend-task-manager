@@ -45,14 +45,16 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue:'en-cours',
       validate: {
-        notEmpty: {
-          msg: 'Veuillez selectionner le statut'
-        },
         isIn: {
           args: [['en-cours', 'terminée']],
           msg:'Le statut n\'est pas valide'
         }
       }
+    }
+    ,checked:{
+      type:DataTypes.BOOLEAN,
+      allowNull:false,
+      defaultValue:false
     },
     deadline: {
       type: DataTypes.DATE,

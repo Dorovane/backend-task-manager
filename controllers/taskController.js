@@ -198,12 +198,13 @@ exports.checkedTask=(req,res)=>{
   const checked= req.body.checked
   Tasks.findByPk(id)
     .then((task)=>{
+      const newTask=task
       if(task){
         Tasks.update({checked},{where:{id:id}})
-          .then((task)=>{
+          .then(()=>{
             res.status(200).json({
               message:'Maj reussis',
-              data:task
+              data:newTask
             })
           })
           .catch((error)=>{

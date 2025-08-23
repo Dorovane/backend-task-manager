@@ -137,7 +137,7 @@ exports.updateTask=(req, res) => {
     .then((task) => {
       if (task) {
         const { title, description, deadline, priority,checked,status} = req.body
-        if(checked===undefined){
+        if(checked!==undefined){
           Tasks.update({checked,status},{where:{id:id}})
           .then(()=>{
             res.status(200).json({

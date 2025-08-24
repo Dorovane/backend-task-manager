@@ -14,7 +14,7 @@ const userRoutes=require('./routes/users')
 
 //Middlewares globales
 
-app.use(cors({origin:'https://todosphere.netlify.app/' }))
+app.use(cors({origin:'https://todosphere.netlify.app' }))
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(helmet())

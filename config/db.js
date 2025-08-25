@@ -9,6 +9,7 @@ const DIALECT = process.env.DIALECT;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: HOST,
   dialect: DIALECT,
+  port: process.env.DB_PORT || undefined,
   dialectOptions: {
     ssl: { rejectUnauthorized: false } 
   },
